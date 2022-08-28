@@ -20,10 +20,10 @@ class Card:
 three_of_clubs = Card("Clubs", 'Three')
 
 # Create an example card
-# print(suits[0])
-# print(ranks[0])
-# two_hearts = Card(suits[0], ranks[0])
-# print(two_hearts)
+print(suits[0])
+print(ranks[0])
+two_hearts = Card(suits[0], ranks[0])
+print(two_hearts)
 
 
 # DECK CLASS
@@ -62,7 +62,7 @@ print(my_card)
 # PLAYER CLASS
 class Player:
 
-    def __init__(self,name):
+    def __init__(self, name):
         self.name = name
         # A new player has no cards
         self.all_cards = []
@@ -70,17 +70,26 @@ class Player:
     def remove_one(self):
         # Note we remove one card from the List of all_cards
         # We state 0 to remove from the "top" of the deck
-        # We'll imangine index -1 as the bottom of the deck
+        # We'll imagine index -1 as the bottom of the deck
         return self.all_cards.pop(0)  # pop() method removes the item at the given index from the list and returns the removed item.
 
-    def add_cards(self,new_cards):
+    def add_cards(self, new_cards):
         if type(new_cards) == type([]):
-            self.add_cards().extend(new_cards)
+            self.all_cards().extend(new_cards)
         else:
             self.all_cards.append(new_cards)
+
 
     def __str__(self):
         return f'Player {self.name} has {len(self.all_cards)} cards.'
 
 mark = Player("Mark")
+mark
+
+print(mark)
+
+two_hearts
+mark.add_cards(two_hearts)
+print(mark)
+mark.add_cards([two_hearts,two_hearts,two_hearts])
 print(mark)
