@@ -24,3 +24,33 @@ class Card:
         self.rank = rank
     def __str__(self):
         return self.rank + " of " + self.suit
+
+# Step 3: Create a Deck Class
+# Here the 52 card objects is stored in a list that can later be shuffled.
+# First, though, we need to instantiate all 52 unique card objects and add them to the list.
+# So long as the Card class definition appears in our code, we can build Card objects inside our Deck __init__ method
+class Deck:
+
+    def __init__(self):
+        self.deck = [] # start with an empty list
+        for suit in suits:
+            for rank in ranks:
+                self.deck.append(Card(suit, rank))
+
+    def __str__(self):
+        deck_comp = ''
+        for card in self.deck:
+            deck_comp += '\n'+ card.__str__()
+        return "The Deck has: " + deck_comp
+
+    def shuffle(self):
+        random.shuffle(self.deck)
+
+    def deal(self):
+        single_card = self.deck.pop()
+        return single_card
+
+# TESTING: TO SEE WHAT THE DECK OF CARDS LOOKS LIKE!
+test_deck = Deck()
+test_deck.shuffle()
+print(test_deck)
