@@ -54,3 +54,133 @@ class Deck:
 test_deck = Deck()
 test_deck.shuffle()
 print(test_deck)
+
+# Step 4: Create a Hand Class
+# In addition to holding Card objects dealt from the Deck,
+# the Hand class may be used to calculate the value of those cards using the values dictionary defined above.
+# It may also need to adjust for the value of Aces when appropriate.
+class Hand:
+    def __init__(self):
+        self.cards = [] # start with an empty list like in the Deck class
+        self.value = 0  # start with zero value
+        self.aces = 0   # add an attribute to keep track of aces
+
+    def add_card(self,card):
+        # card passed in
+        # from Deck.deal() --> single Card(suit, rank)
+        self.cards.append(card)
+        self.value += values[card.rank]
+
+        # track aces
+        if card.rank == 'Ace':
+            self.aces += 1
+
+    def adjust_for_ace(self):
+
+        # IF TOTAL VALUE > 21 AND I STILL HAVE AN ACE
+        # THAN CHANGE MY ACE TO BE A 1 INSTEAD OF AN 11
+        while self.value > 21 and self.aces > 0:
+            self.values -= 10
+            self.aces -= 1
+
+zero = 0
+one = 1
+two = 2
+
+if 1:
+    print('TRUE')
+
+test_deck = Deck()
+test_deck.shuffle()
+
+# PLAYER
+test_player = Hand()
+# Deal 1 card from the deck CARD(suit, rank)
+pulled_card = test_deck.deal()
+print(pulled_card)
+test_player.add_card(pulled_card)
+print(test_player.value)
+
+test_player.add_card(test_deck.deal())
+test_player.value
+
+# Step 5: Create a Chip class
+# In addition to decks of cards and hands, we need to keep track of a Player's starting chips, bets, and ongoing winnings.
+# This could be done using global variables, but in the spirit of object oriented programming, let's make a Chips class instead!
+class Chips:
+
+    def __init__(self):
+        self.total = 100    # This can be set to a default value or supplied by a user input
+        self.bet = 0
+
+    def win_bet(self):
+        self.total += self.bet
+
+    def lose_bet(self):
+        self.total -= self.bet
+
+# Step 6: Write a function for taking bets
+# Since we're asking the user for an integer value, this would be a good place to use try/except.
+# Remember to check that a Player's bet can be covered by their available chips.
+def take_bet():
+
+    while True:
+
+        try:
+            chips.bet = int(input("How many chips would you like to bet?"))
+        except:
+            print("Sorry please provide an integer")
+        else:
+            if chips.bet > chips.total:
+                print('Sorry, you do not have enough chips! You have: {}'.format(chips.total))
+            else:
+                break
+
+# Step 7: Write a function for taking hits
+# Either player can take hits until they bust. This function will be called during gameplay anytime a Player requests a hit, or a Dealer's hand is less than 17.
+# It should take in Deck and Hand objects as arguments, and deal one card off the deck and add it to the Hand.
+# You may want it to check for aces in the event that a player's hand exceeds 21.
+def hit(deck, hand):
+
+    single_card = deck.deal()
+    hand.add_card(single_card)
+    hand.adjust_for_ace()
+
+# Step 8: Write a function prompting the Player to Hit or Stand
+# This function should accept the deck and the player's hand as arguments, and assign playing as a global variable.
+# If the Player Hits, employ the hit() function above. If the Player Stands, set the playing variable to False - this will control the behavior of a while loop later on in our code.
+def hit_or_stand(deck, hand):
+    global playing # to control an upcoming while loop
+
+    while True:
+        x = input('Hit or Stand? Enter h or s ')    # HIT # hh # stand
+
+        if x[0].lower() == 'h':
+            hit(deck,hand)
+
+        elif x[0].lower() == 's':
+            print("Player Stands Dealer's Turn")
+            playing = False
+
+        else:
+            print("Sorry, I did not understand that, Please enter h or s only!!")
+            continue
+        break
+
+# Step 9: Write functions to display cards
+# When the game starts, and after each time Player takes a card, the dealer's first card is hidden and all of Player's cards are visible.
+# At the end of the hand all cards are shown, and you may want to show each hand's total value. Write a function for each of these scenarios.
+def show_some(player, dealer):
+    print("\nDealer's Hand:")
+    print(" <card hidden>")
+    print('', dealer.cards[1])
+    print("\nPlayer's Hand:", *player.cards, sep='\n ')
+
+def show_all(player, dealer):
+    # show all the dealer's cards
+    print("\nDealer's Hand:", *dealer.cards, sep='\n ')
+    print("Dealer's Hand =",dealer.value)
+    print("\nPlayer's Hand:", *player.cards, sep='\n ')
+    print("Player's Hand =",player.value)
+
+
