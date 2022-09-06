@@ -1,0 +1,27 @@
+body {
+    background-color: #EAF6F6;
+  }
+
+  h1 {
+    color: #0F3460;
+  }
+
+  h3 {
+    color: #0F3460;
+  }
+
+  hr {
+    width: 5%;
+    border-style: dotted none none;
+    border-width: 10px;
+    border-color: grey;
+  }
+
+  .row {
+  display: flex;
+}
+
+.column {
+  flex: 33.33%;
+  padding: 5px;
+}
