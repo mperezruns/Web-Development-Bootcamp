@@ -18,35 +18,25 @@ h3 {
 }
 
 .top-container {
-  background-color: #CFE8A9;
+  background-color: #FFAE6D;
   position: relative;
   padding-top: 100px;
 }
 
-.middle-container {
-  background-color: green;
-  width: 200px;
-  height: 200px;
-}
-
-.bottom-container {
-  background-color: black;
-  width: 200px;
-  height: 200px;
-}
 
 .pro {
   text-decoration: underline;
 }
 
-.top-cloud {
+
+.top-tiger {
   position: absolute;
   right: 300px;
   top: 50px;
 }
 
-.bottom-cloud {
+.bottom-tiger {
   position: absolute;
+  top:50;
   left: 300px;
-  bottom: 300px;
 }
